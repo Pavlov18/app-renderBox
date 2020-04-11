@@ -1,6 +1,9 @@
 var $start = document.querySelector('#start')
 var $game = document.querySelector('#game')
 var $time = document.querySelector('#time')
+var $result = document.querySelector('#result')
+var $timeHeader = document.querySelector('#time-header')
+var $resultHeader = document.querySelector('#result-header')
 
 var score = 0
 var isGameStarted = false
@@ -11,6 +14,10 @@ $game.addEventListener('click', handleBoxClick)
 
 // запуск игры (убираем кнопку старт и заливаем фон белым цветом)
 function startGame() {
+    score  = 0;
+    setGameTime()
+    $timeHeader.classList.remove('hide')
+    $resultHeader.classList.add('hide')
     isGameStarted = true
     $game.style.backgroundColor = '#fff'
     $start.classList.add('hide')
@@ -29,8 +36,25 @@ function startGame() {
     renderBox()
 }
 
+ 
+
+function setGameScore() {
+    $result.textContent = score.toString()
+}
+
+function setGameTime() {   // установка изначального времени игры
+    var time = 5
+    $time.textContent = time.toFixed(1)
+} 
+
 function endGame() {
     isGameStarted = false
+    setGameScore()
+    $start.classList.remove('hide')
+    $game.innerHTML = ''
+    $game.style.backgroundColor = '#ccc'
+    $timeHeader.classList.add('hide')
+    $resultHeader.classList.remove('hide')
 }
 
 // если кликнули по квадрату (проверка, есть ли аттрибут data-box)
