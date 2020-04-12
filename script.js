@@ -5,6 +5,7 @@ var $result = document.querySelector('#result')
 var $timeHeader = document.querySelector('#time-header')
 var $resultHeader = document.querySelector('#result-header')
 var $gameTime = document.querySelector('#game-time')
+var colorCollection = ['#1a0dab', '#d00', '#551a8b', '#000', '#070', '#ffdb4d']
 
 var score = 0
 var isGameStarted = false
@@ -88,10 +89,11 @@ function renderBox() {
     var gameSize = $game.getBoundingClientRect() // получение данных игрового поля
     var maxTop = gameSize.height - boxSize
     var maxLeft = gameSize.width - boxSize
- 
+    var randomColorIndex = getRandom(0, colorCollection.length)
+
     box.style.height = box.style.width = boxSize+'px'
     box.style.position = 'absolute'
-    box.style.backgroundColor = getRandomColor()
+    box.style.backgroundColor = colorCollection[randomColorIndex]
     
     box.style.borderRadius = '50%'
     box.style.top = getRandom(0, maxTop) + 'px'
@@ -104,10 +106,4 @@ function renderBox() {
 
 function getRandom(min, max) { // генерация случайных чисел
     return Math.floor(Math.random() * (max-min) +min)
-}
-
-function getRandomColor() {
-    var colorCollection = ['#1a0dab', '#d00', '#551a8b', '#000', '#070', '#ffdb4d']
-    var randomColor = Math.floor(Math.random() * colorCollection.length)
-    return colorCollection[randomColor]
 }
